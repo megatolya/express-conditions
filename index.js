@@ -1,6 +1,6 @@
 'use strict';
 
-const createCheck = prop => (params, handler) => (req, res, next) => {
+const createCondition = prop => (params, handler) => (req, res, next) => {
     const target = prop
         ? req[prop]
         : req;
@@ -12,7 +12,7 @@ const createCheck = prop => (params, handler) => (req, res, next) => {
         } else if (value === false) {
             return !(paramName in target);
         } else {
-            return value === target[paramName];
+            return value == target[paramName];
         }
     });
 
@@ -24,9 +24,11 @@ const createCheck = prop => (params, handler) => (req, res, next) => {
 };
 
 module.exports = {
-    query: createCheck('query'),
-    req: createCheck(),
-    headers: createCheck('headers'),
-    cookies: createCheck('cookies'),
-    session: createCheck('session')
+    query: createCondition('query'),
+    req: createCondition(),
+    headers: createCondition('headers'),
+    cookies: createCondition('cookies'),
+    params: createCondition('params'),
+    session: createCondition('session'),
+    createCondition
 };
