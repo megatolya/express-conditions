@@ -1,0 +1,32 @@
+{
+  "name": "express-conditions",
+  "version": "1.0.0",
+  "description": "Helper for building simple express middlewares",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/megatolya/express-conditions.git"
+  },
+  "keywords": [
+    "express",
+    "middlewares",
+    "check",
+    "query",
+    "check",
+    "headers",
+    "check",
+    "req"
+  ],
+  "author": "Anatoly Ostrovsky <forgetthisbox@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/megatolya/express-conditions/issues"
+  },
+  "engines": {
+      "node": ">=6"
+  },
+  "homepage": "https://github.com/megatolya/express-conditions#readme"
+}
