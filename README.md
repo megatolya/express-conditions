@@ -4,7 +4,7 @@ Helper for creating conditional middlewares in express.
 
 ## Installation
 ```
-npm install --save express-conditions
+npm install --save express-conditions@1.1.0
 ```
 
 
@@ -26,7 +26,7 @@ app.get('/me', session({auth: true}, (req, res, next) => {
 
 ## API
 
-`express-conditions` exports 6 comparators, all with the same api:
+`express-conditions` exports 6 condition factories, all with the same api:
 * req
 * query (req.query)
 * headers (req.headers)
@@ -60,7 +60,7 @@ query({size: 123}, handler) // /page?size=123 valid
 query({size: 'small'}, handler) // /page?size=big invalid
 ```
 
-You can build your own comparator:
+You can build your own conditions:
 
 ```js
 const {createCondition} = require('express-conditions');
