@@ -7,12 +7,15 @@ const createCondition = prop => (params, handler) => (req, res, next) => {
     const passed = Object.keys(params).every(paramName => {
         const value = params[paramName];
 
-        if (value === true) {
-            return paramName in target;
-        } else if (value === false) {
-            return !(paramName in target);
-        } else {
-            return value == target[paramName];
+        switch (value) {
+            case true:
+                return paramName in target;
+
+            case false:
+                return !(paramName in target);
+
+            default:
+                return value == target[paramName];
         }
     });
 
@@ -24,11 +27,11 @@ const createCondition = prop => (params, handler) => (req, res, next) => {
 };
 
 module.exports = {
-    query: createCondition('query'),
+    createCondition,
     req: createCondition(),
-    headers: createCondition('headers'),
     cookies: createCondition('cookies'),
+    headers: createCondition('headers'),
     params: createCondition('params'),
-    session: createCondition('session'),
-    createCondition
+    query: createCondition('query'),
+    session: createCondition('session')
 };
