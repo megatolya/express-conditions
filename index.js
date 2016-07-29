@@ -7,31 +7,28 @@ const createCondition = prop => (params, handler) => (req, res, next) => {
     const passed = Object.keys(params).every(paramName => {
         const value = params[paramName];
 
-        switch (value) {
-            case true:
-                return paramName in target;
-
-            case false:
-                return !(paramName in target);
-
-            default:
-                return value == target[paramName];
+        if (value === true) {
+            return paramName in target;
+        } else if (value === false) {
+            return !(paramName in target);
+        } else {
+            return value == target[paramName];
         }
     });
 
     if (!passed) {
-        next();
+        next('skip-middleware');
     } else {
-        handler(req, res, next);
+        next();
     }
 };
 
 module.exports = {
-    createCondition,
-    req: createCondition(),
-    cookies: createCondition('cookies'),
-    headers: createCondition('headers'),
-    params: createCondition('params'),
     query: createCondition('query'),
-    session: createCondition('session')
+    req: createCondition(),
+    headers: createCondition('headers'),
+    cookies: createCondition('cookies'),
+    params: createCondition('params'),
+    session: createCondition('session'),
+    createCondition
 };
